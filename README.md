@@ -5,7 +5,11 @@ Configuration
 =============
 
 1. Burn image to 16GB SD Card
-2. Find your bluetooth MAC address
+2. Make the file system temporarily read/write
+    ```
+    sudo mount -o remount,rw /boot
+    ```
+4. Find your bluetooth MAC address
     ```
     hciconfig
     ```
@@ -53,18 +57,22 @@ Configuration
 Monitor Direwolf
 ================
 
-If using the crontab option
 Log in to your raspberry pi first. Once logged in:
-    ```
-    screen -x
-    ```
-    
-or
-
     ```
     sudo tmux attach -t direwolf
     ```
-    
+to exit
+    ```
+    CTRL-b d
+    ```
+
+To make file system read/write until reboot
+============================================
+
+    ```
+    sudo mount -o remount,rw /boot
+    ```
+
 Service Method
 ==============
 
