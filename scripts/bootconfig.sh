@@ -2,7 +2,7 @@
 sleep 3
 
 BOOT_CONF="/boot/pitnc.conf"
-BOOT_CONF_LOCAL="/home/tnc/dev/pitnc/scripts/pitnc.conf"
+BOOT_CONF_LOCAL="/home/tnc/.pitnc/pitnc.conf"
 PITNC="/home/tnc/dev/pitnc/pitnc.py"
 
 if df -h | grep 'overlay'; then
