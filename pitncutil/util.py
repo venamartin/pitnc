@@ -181,5 +181,8 @@ def bootwifi():
                 # wow, that was a lot of error checking...
                 wifi_add(bc_wifi['ssid'],bc_wifi['password'])
     
+def direwolf_restart():
+    print("Restarting Direwolf...")
+    os.system('sudo systemctl restart direwolf')
         
-        
+    
