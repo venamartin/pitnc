@@ -1,0 +1,17 @@
+Installation Notes
+==================
+
+Direwolf
+--------
+
+Direwolf is installed as a service running under tmux (like unix screen).
+
+	/etc/systemd/system/direwolf.service
+
+
+Startup Scripts
+---------------
+
+The main startup scripts are located in the rc.local. These start the bluetooth configuration on boot.
+
+	/etc/rc.local
