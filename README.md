@@ -92,10 +92,48 @@ In the root directory of the PiTNC SD Card is a file `pitnc.conf`. This configur
 After the Raspberry Pi boots up, if the configuration was done correctly it should connect to your local WIFI.
 
 1. From the command prompt on your computer (Windows PowerShell for example). Type the following at the prompt:
-   ```command
+   ```console
    $ ssh tnc@pitnc.local
    ```
 2. You will be prompted for the password. The default password is **1200baud**. This can be changed after logging into the device.
 
+3. The following information will be displayed:
+   ```console
+   ======================================
+               _ __
+        ____  (_) /_____  _____
+       / __ \/ / __/ __ \/ ___/
+      / /_/ / / /_/ / / / /__
+     / .___/_/\__/_/ /_/\___/
+    /_/  Ham Tracks Offroad
+
+   ======================================
    
+   BLUETOOTH NAME: pitnc <YOUR BLUETOOTH MAC>
+    BLUETOOTH MAC: <YOUR BLOOTOOTH MAC>
+       IP ADDRESS: <YOUR IP ADDRESS>
+             WIFI: <YOUR WIFI>
+    TNC KISS PORT: 8001
+      FILE SYSTEM: READ/WRITE
+   
+   usage: pitnc.py [-h] [-s] [-i] [-a] [--drestart] [--dmonitor] [-r | -w]
+   
+   pitnc configuration tool
+   
+   optional arguments:
+     -h, --help       show this help message and exit
+     -s, --splash     display the splash screen.
+     -i, --info       display the system info.
+     -a, --addwifi    add a wifi network.
+     --drestart       restart direwolf (after any modifications to direwolf.conf)
+     --dmonitor       enter direwolf activity monitor.
+     -r, --readonly   make the file system read only.
+     -w, --readwrite  make the file system read and write.
+  ```
+
+
+# Connecting via Bluetooth
+
+# WinLink connection via TCP/IP
+
    
