@@ -17,15 +17,7 @@ The following APRS applications are supported: APRSDroid (Android), aprs.fi (iOS
 | Digirig Interface Cable to Radio | ~$30.00 | Search for your radio and select the appropriate cable: https://digirig.net/store/ |
 | Ferrites (Optional) | $9.99 | https://a.co/d/3dWxvo8 |
 
-
-
 # Writing Raspberry Pi Image to SD Card using Win32 Disk Imager
-
-## Prerequisites
-Before you begin, ensure you have the following:
-- Raspberry Pi image file (e.g., .img, .iso)
-- Win32 Disk Imager software installed on your Windows computer
-- Blank SD card with sufficient capacity (at least the size of the image file)
 
 ## Steps
 
@@ -62,5 +54,3 @@ Before you begin, ensure you have the following:
 
 10. **Power Up Raspberry Pi**
     - Power up your Raspberry Pi, and it should boot from the SD card with the flashed image.
-
-Congratulations! You have successfully written a Raspberry Pi image file to an SD card using Win32 Disk Imager.
