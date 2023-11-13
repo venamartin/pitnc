@@ -17,9 +17,9 @@ The following APRS applications are supported: APRSDroid (Android), aprs.fi (iOS
 | Digirig Interface Cable to Radio | ~$30.00 | Search for your radio and select the appropriate cable: https://digirig.net/store/ |
 | Ferrites (Optional) | $9.99 | https://a.co/d/3dWxvo8 |
 
-# Writing Raspberry Pi Image to SD Card using Win32 Disk Imager
+<img src="docs/pitnc.jpg">
 
-## Steps
+# Writing PiTNC Image to SD Card (Win32 Disk Imager)
 
 1. **Download and Install Win32 Disk Imager**
    - Visit the [official Win32 Disk Imager website](https://sourceforge.net/projects/win32diskimager/) to download the software.
@@ -47,10 +47,55 @@ The following APRS applications are supported: APRSDroid (Android), aprs.fi (iOS
 
 8. **Verify Write Completion**
    - Once the process is complete, Win32 Disk Imager will display a confirmation message.
-   - Safely eject the SD card from your computer.
 
-9. **Insert SD Card into Raspberry Pi**
-   - Insert the SD card into the Raspberry Pi's card slot.
+# Editing the pitnc.conf file on SD Card
 
-10. **Power Up Raspberry Pi**
-    - Power up your Raspberry Pi, and it should boot from the SD card with the flashed image.
+In the root directory of the PiTNC SD Card is a file `pitnc.conf`. This configuration file allows for initual setup of your WIFI connectivity. When the Raspberry Pi boots the WIFI information will be automatically configured and will connect to your local WIFI.
+
+1. Open `pitnc.conf` in a text editor like Notepad
+
+2. The contents of the file are as shown:
+   ```
+   # PiTNC BOOT Configuration file.
+   # This file is checked durring boot. If settings are changed and the pi is in read/write
+   # mode, the settings are applied.
+   
+   # WIFI
+   # NOTE: Must leave a space after colon. Example: ssid: MyWifiSsid
+   #       See https://yaml.org/
+   wifi:
+       ssid: 
+       password: 
+   
+   # FILE SYSTEM
+   # Set fsmode to 1 to make file system READ ONLY
+   # Set fsmode to 2 to make file system READ WRITE
+   # Set fsmode to 3 to leave the file system mode unchanged
+   fsmode: 3
+   ```
+3. Enter your WIFI SSID (name of your wifi network) after `ssid: `
+   ```
+   ssid: <your wifi ssid>
+   ```
+4. Enter your WIFI Password after `password: `.
+   ```
+   password: <your wifi password>`
+   ```
+   
+   > [!NOTE]  
+   > Make sure to leave a space after the `:`. This is a YAML file format requirement.
+5. Save the file.
+6. Safely eject the SD Card from your computer.
+
+# SSH Into you PiTNC
+
+After the Raspberry Pi boots up, if the configuration was done correctly it should connect to your local WIFI.
+
+1. From the command prompt on your computer (Windows PowerShell for example). Type the following at the prompt:
+   ```command
+   $ ssh tnc@pitnc.local
+   ```
+2. You will be prompted for the password. The default password is **1200baud**. This can be changed after logging into the device.
+
+   
+   
