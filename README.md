@@ -1,6 +1,10 @@
 # PiTNC [[1.02](https://s3.us-west-2.amazonaws.com/vena.com/pitnc/pitnc_master_rev102.zip)]
 
-PiTNC provides a robust bluetooth and WIFI accessible TNC. When connected to a compatible mobile or base station full APRS and Winlink KISS interface is available on Bluetooth or a TCP/IP port.
+PiTNC provides a robust bluetooth and WIFI accessible TNC utilizing a Raspberry Pi Zero W and Digirig. When connected to a compatible mobile or base station full APRS and Winlink KISS interface is available on Bluetooth or a TCP/IP port.
+
+A Raspberry Pi Image file is located at:
+
+https://s3.us-west-2.amazonaws.com/vena.com/pitnc/pitnc_master_rev102.zip
 
 The following APRS applications are supported: APRSDroid (Android), aprs.fi (iOS), YAAC (Windows and Mac), and Ham Tracks (Android).
 
