@@ -1,4 +1,4 @@
-# PiTNC [1.02]
+# PiTNC [[1.02](https://s3.us-west-2.amazonaws.com/vena.com/pitnc/pitnc_master_rev102.zip)]
 
 PiTNC provides a robust bluetooth and WIFI accessible TNC. When connected to a compatible mobile or base station full APRS and Winlink KISS interface is available on Bluetooth or a TCP/IP port.
 
