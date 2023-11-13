@@ -21,31 +21,39 @@ The following APRS applications are supported: APRSDroid (Android), aprs.fi (iOS
 
 # Writing PiTNC Image to SD Card (Win32 Disk Imager)
 
-1. **Download and Install Win32 Disk Imager**
+1. **Dwonload and unzip the latest PiTNC image file**
+   - Image file can be downloaded from https://www.vena.com/pitnc/pitnc_master_rev102.zip
+   - Unzip the image file by right-clicking and selecting `Extract all...`
+   
+2. **Download and Install Win32 Disk Imager**
    - Visit the [official Win32 Disk Imager website](https://sourceforge.net/projects/win32diskimager/) to download the software.
    - Follow the installation instructions to install Win32 Disk Imager on your Windows computer.
 
-2. **Insert SD Card**
+3. **Insert SD Card**
    - Insert the blank SD card into your computer's SD card reader.
 
-3. **Open Win32 Disk Imager**
+4. **Open Win32 Disk Imager**
    - Launch Win32 Disk Imager on your computer. You may need to run it as an administrator.
 
-4. **Select Raspberry Pi Image File**
+5. **Select Raspberry Pi Image File**
    - Click on the folder icon in the "Image File" field.
-   - Navigate to and select your Raspberry Pi image file.
+   - Navigate to and select the file you unzipped `pitnc_master_revXXX.img`
 
-5. **Choose Target Device**
-   - In the "Device" field, select the drive letter corresponding to your SD card. Be careful to choose the correct drive to avoid data loss.
+6. **Choose Target Device**
+   - In the "Device" field, select the drive letter corresponding to your SD card. 
 
-6. **Write Image to SD Card**
+  
+   > [!WARNING]  
+   > Be careful to choose the correct drive to avoid data loss.
+
+7. **Write Image to SD Card**
    - Click the "Write" button to begin the writing process.
    - Confirm the action when prompted, as this will overwrite all data on the selected SD card.
 
-7. **Wait for Completion**
+8. **Wait for Completion**
    - Allow Win32 Disk Imager to complete the writing process. This may take some time, depending on the size of the image file.
 
-8. **Verify Write Completion**
+9. **Verify Write Completion**
    - Once the process is complete, Win32 Disk Imager will display a confirmation message.
 
 # Editing the pitnc.conf file on SD Card
