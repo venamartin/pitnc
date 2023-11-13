@@ -8,6 +8,11 @@ Direwolf is installed as a service running under tmux (like unix screen).
 
 	/etc/systemd/system/direwolf.service
 
+To make modifications to the startup commandline options for direwolf.
+
+	$ sudo micro /etc/systemd/system/direwolf.service
+ 	$ sudo systemctl restart direwolf
+
 
 Startup Scripts
 ---------------

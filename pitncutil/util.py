@@ -23,7 +23,7 @@ from textwrap import dedent
 import ctypes, os
 from hashlib import pbkdf2_hmac
 import yaml
-
+import time
 
 DIREWOLF_CONF = '/home/tnc/direwolf.conf'
 WIFI_CONF = '/etc/wpa_supplicant/wpa_supplicant.conf'
@@ -164,8 +164,6 @@ def wifi_add(ssid, password):
         conf.write(f)
 
 def bootwifi():
-    if is_readonly():
-        return
 
     try:        
         with open(BOOT_CONF,"r") as f:
@@ -174,15 +172,44 @@ def bootwifi():
     except:
         return
 
+    read_only = is_readonly()
+    bc_fsmode = 3
+    if bc != None and 'fsmode' in bc.keys():
+        bc_fsmode = bc['fsmode']
+        
+    if read_only:
+        if bc_fsmode == 1 or bc_fsmode == 3:
+            # do nothing
+            pass
+        elif bc_fsmode == 2:
+            # change to rw mode
+            print("Set read write mode --bootwifi")
+            set_readwrite()
+
+        return
+
     if bc != None and 'wifi' in bc.keys():
         bc_wifi = bc['wifi']
         if bc_wifi != None and 'ssid' in bc_wifi.keys() and 'password' in bc_wifi.keys():
             if bc_wifi['ssid'] != None and bc_wifi['password'] != None:
                 # wow, that was a lot of error checking...
                 wifi_add(bc_wifi['ssid'],bc_wifi['password'])
+
+    if not read_only:
+        if bc_fsmode == 1:
+            print("Set read only in --bootwifi")
+            set_readonly()
+            time.sleep(5.0)
+        else:
+            print("Leaving filesystem unchanged " + str(bc_fsmode))
+        
     
 def direwolf_restart():
     print("Restarting Direwolf...")
     os.system('sudo systemctl restart direwolf')
         
+def direwolf_monitor():
+    print("Entering direwolf activity output. To exit this mode press:\n   CTRL-b d")
+    time.sleep(5.0)    
+    os.system('sudo tmux attach -t direwolf')
     

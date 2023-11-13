@@ -5,11 +5,11 @@ BOOT_CONF="/boot/pitnc.conf"
 BOOT_CONF_LOCAL="/home/tnc/.pitnc/pitnc.conf"
 PITNC="/home/tnc/dev/pitnc/pitnc.py"
 
-if df -h | grep 'overlay'; then
+#if df -h | grep 'overlay'; then
 	# disable read only file system
 	#echo "In read only mode."
-	sleep 1
-else
+#	sleep 1
+#else
 
 	if [ -e $BOOT_CONF ]
 	then
@@ -28,5 +28,5 @@ else
 		fi
 	fi
 		
-fi
+#fi
 

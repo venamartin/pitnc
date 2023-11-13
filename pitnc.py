@@ -38,6 +38,7 @@ parser.add_argument("-s", "--splash", help="display the splash screen.", action=
 parser.add_argument("-i", "--info", help="display the system info.", action="store_true")
 parser.add_argument("-a", "--addwifi", help="add a wifi network.", action="store_true")
 parser.add_argument("--drestart", help="restart direwolf (after any modifications to direwolf.conf)", action="store_true")
+parser.add_argument("--dmonitor", help="enter direwolf activity monitor.", action="store_true")
 parser.add_argument('--bootwifi', help=argparse.SUPPRESS, action="store_true")
 parser.add_argument('--bashrc', help=argparse.SUPPRESS, action="store_true")
 
@@ -67,6 +68,9 @@ if args.addwifi:
 
 if args.drestart:
     pitncutil.direwolf_restart()
+
+if args.dmonitor:
+    pitncutil.direwolf_monitor()
     
 if args.readonly:
     pitncutil.set_readonly()
