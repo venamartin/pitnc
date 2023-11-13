@@ -129,11 +129,7 @@ After the Raspberry Pi boots up, if the configuration was done correctly it shou
      --dmonitor       enter direwolf activity monitor.
      -r, --readonly   make the file system read only.
      -w, --readwrite  make the file system read and write.
-  ```
+   ```
 
-
-# Connecting via Bluetooth
-
-# WinLink connection via TCP/IP
 
    
