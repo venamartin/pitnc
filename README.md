@@ -101,6 +101,11 @@ After the Raspberry Pi boots up, if the configuration was done correctly it shou
    ```console
    $ ssh tnc@pitnc.local
    ```
+
+   > [!NOTE]  
+   > On Windows 10 - 11 `Resolve-DnsName -Name pitnc.local` can be used to return the ip address of the PiTNC.
+
+   
 2. You will be prompted for the password. The default password is **1200baud**. This can be changed after logging into the device.
 
 3. The following information will be displayed:
