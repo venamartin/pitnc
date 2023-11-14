@@ -54,12 +54,6 @@ The following APRS applications are supported: APRSDroid (Android), aprs.fi (iOS
    - Click the "Write" button to begin the writing process.
    - Confirm the action when prompted, as this will overwrite all data on the selected SD card.
 
-8. **Wait for Completion**
-   - Allow Win32 Disk Imager to complete the writing process. This may take some time, depending on the size of the image file.
-
-9. **Verify Write Completion**
-   - Once the process is complete, Win32 Disk Imager will display a confirmation message.
-
 # Editing the pitnc.conf file on SD Card
 
 In the root directory of the PiTNC SD Card is a file `pitnc.conf`. This configuration file allows for initual setup of your WIFI connectivity. When the Raspberry Pi boots the WIFI information will be automatically configured and will connect to your local WIFI.
