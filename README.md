@@ -47,8 +47,8 @@ The following APRS applications are supported: APRSDroid (Android), aprs.fi (iOS
    - In the "Device" field, select the drive letter corresponding to your SD card. 
 
   
-   > [!WARNING]  
-   > Be careful to choose the correct drive to avoid data loss.
+> [!WARNING]  
+> Be careful to choose the correct drive to avoid data loss.
 
 7. **Write Image to SD Card**
    - Click the "Write" button to begin the writing process.
@@ -85,11 +85,10 @@ In the root directory of the PiTNC SD Card is a file `pitnc.conf`. This configur
    ```
 4. Enter your WIFI Password after `password: `.
    ```
-   password: <your wifi password>`
+   password: <your wifi password>
    ```
-   
-   > [!NOTE]  
-   > Make sure to leave a space after the `:`. This is a YAML file format requirement.
+> [!NOTE]  
+> Make sure to leave a space after the `:`. This is a YAML file format requirement.
 5. Save the file.
 6. Safely eject the SD Card from your computer.
 
@@ -102,8 +101,8 @@ After the Raspberry Pi boots up, if the configuration was done correctly it shou
    $ ssh tnc@pitnc.local
    ```
 
-   > [!NOTE]  
-   > On Windows 10 - 11, `PS C:\> Resolve-DnsName -Name pitnc.local` can be used to return the ip address of the PiTNC.
+> [!NOTE]  
+> On Windows 10 - 11, `PS C:\> Resolve-DnsName -Name pitnc.local` can be used to return the ip address of the PiTNC.
 
    
 2. You will be prompted for the password. The default password is **1200baud**. This can be changed after logging into the device.
