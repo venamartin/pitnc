@@ -25,7 +25,7 @@ The following APRS applications are supported: APRSDroid (Android), aprs.fi (iOS
 
 # Writing PiTNC Image to SD Card (Win32 Disk Imager)
 
-1. **Dwonload and unzip the latest PiTNC image file**
+1. **Download and unzip the latest PiTNC image file**
    - Image file can be downloaded from [http://www.vena.com/pitnc/pitnc_master_rev102.zip](https://s3.us-west-2.amazonaws.com/vena.com/pitnc/pitnc_master_rev102.zip)
    - Unzip the image file by right-clicking and selecting `Extract all...`
    
