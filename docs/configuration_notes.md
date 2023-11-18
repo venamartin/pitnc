@@ -250,3 +250,10 @@ $ direwolf
 
 Note: If you are running gpsd with AUTOUSB="true" you may notice that the Baofeng will get stuck in transmit mode. This is a known issue with the DigiRig under Linux when using gpsd. A workaround is to edit /etc/default/gpsd and set AUTOUSB="false", then reboot.
 
+
+Auto Hotspot
+------------
+
+Follow the following instructions:
+[auto_hot_spot.md](auto_hot_spot.md)
+
