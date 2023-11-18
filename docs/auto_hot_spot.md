@@ -1,4 +1,7 @@
-https://github.com/RaspberryConnect/AutoHotspot-Installer
+
+> [!NOTE]
+> This installation script repository is located at:
+> https://github.com/RaspberryConnect/AutoHotspot-Installer
 
 
 RaspberryConnect.com
