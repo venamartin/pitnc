@@ -1,0 +1,12 @@
+[Unit]
+Description=Direwolf
+After=network.target
+
+[Service]
+Type=forking
+#Modify the end of the line below to fit your own needs i.e path to your configuration file
+ExecStart=/usr/bin/tmux new-session -d -s direwolf '/usr/local/bin/direwolf -t 0 -X 1 -c /home/tnc/direwolf.conf'
+Restart=always
+
+[Install]
+WantedBy=default.target
