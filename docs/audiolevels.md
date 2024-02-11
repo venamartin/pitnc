@@ -1,4 +1,4 @@
-# Adjusting audio levels
+# Adjusting audio levels in Digirig
 
 1. SSH into PiTNC
 
