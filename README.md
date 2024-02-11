@@ -1,252 +1,145 @@
-# pitnc
-Raspberry Pi TNC with Direwolf Configuration
+# PiTNC [[1.02](https://s3.us-west-2.amazonaws.com/vena.com/pitnc/pitnc_master_rev102.zip)]
 
-Configuration
-=============
+PiTNC provides a robust bluetooth and WIFI accessible TNC utilizing a Raspberry Pi Zero W and Digirig. When connected to a compatible mobile or base station full APRS and Winlink KISS interface is available on Bluetooth or a TCP/IP port.
 
-1. Burn image to 16GB SD Card
-2. Make the file system temporarily read/write
-    ```
-    sudo mount -o remount,rw /boot
-    ```
-4. Find your bluetooth MAC address
-    ```
-    hciconfig
-    ```
-3. Change the bluetooth name
-    ```
-    sudo nano /etc/machine-info   
-    # add the following line
-    PRETTY_HOSTNAME=pitnc <your BT MAC>
-    ```
-4. Change your callsign (not used but shoud do it anyway for future)
-    ```
-    nano ~/direwolf.conf
-    
-    # search for MYCALL=
-    
-    ```
-6. Change WIFI 
-    ```
-    sudo raspi-config
-    ```
-    Choose System Options --> Wifi
-    
-    or Manually
-    
-    ```
-    sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+A Raspberry Pi Image file is located at:
 
-    network={
-    ssid="The SSID of your network (eg. Network name)"
-    psk="Your Wifi Password"
-    }
-    ```
-7. Reboot
-    ```
-    sudo reboot now
-    ```
-    
-8. Make the system read only
-    ```
-    sudo raspi-config
-    ```
-   Select Performance Options --> Overlay File System
+https://s3.us-west-2.amazonaws.com/vena.com/pitnc/pitnc_master_rev102.zip
+
+The following APRS applications are supported: APRSDroid (Android), aprs.fi (iOS), YAAC (Windows and Mac), and Ham Tracks (Android).
+
+# Required Components
+
+| Item | Price (Aprox) | Purchase Link |
+| ---- | ------------- | ------------- |
+| Raspberry Pi W | $15.00 | https://www.pishop.us/product/raspberry-pi-zero-w/ |
+| Micro USB Power Supply | $7.95 | https://www.pishop.us/product/wall-adapter-power-supply-micro-usb-2-4a-5-25v/ |
+| 16Gb SD Card (larger okay) | $9.00 | https://a.co/d/7Zhavrw |
+| Raspberry Pi Case | $9.99 | https://a.co/d/iUEp1YX |
+| Micro USB to USB C cable | $6.00 | https://a.co/d/3dWxvo8 |
+| Digirig | $50.00 | https://digirig.net/product/digirig-mobile/ |
+| Digirig Interface Cable to Radio | ~$30.00 | Search for your radio and select the appropriate cable: https://digirig.net/store/ |
+| Ferrites (Optional) | $9.99 | https://a.co/d/3dWxvo8 |
+
+<img src="docs/pitnc.jpg">
+
+# Writing PiTNC Image to SD Card (Win32 Disk Imager)
+
+1. **Download and unzip the latest PiTNC image file**
+   - Image file can be downloaded from [http://www.vena.com/pitnc/pitnc_master_rev102.zip](https://s3.us-west-2.amazonaws.com/vena.com/pitnc/pitnc_master_rev102.zip)
+   - Unzip the image file by right-clicking and selecting `Extract all...`
    
-
-Monitor Direwolf
-================
-
-Log in to your raspberry pi first. Once logged in:
-    ```
-    sudo tmux attach -t direwolf
-    ```
-to exit
-    ```
-    CTRL-b d
-    ```
-
-To make file system read/write until reboot
-============================================
-
-    ```
-    sudo mount -o remount,rw /boot
-    ```
-
-Service Method
-==============
-
-```
-Install tmux
-
-sudo apt install tmux
-Code language: Bash (bash)
-Now we can create our systemd unit: create the following file /etc/systemd/system/direwolf.service
-
-You have to adapt the command line to fit your own needs i.e. path to your config file
-
-[Unit]
-Description=Direwolf
-After=network.target
-
-[Service]
-Type=forking
-#Modify the end of the line below to fit your own needs i.e path to your configuration file
-ExecStart=/usr/bin/tmux new-session -d -s direwolf '/usr/local/bin/direwolf -c /home/pi/direwolf.conf'
-Restart=always
-
-[Install]
-WantedBy=default.target
-Code language: Makefile (makefile)
-Next step enable the service
-
-sudo systemctl enable direwolf.service
-Code language: Bash (bash)
-If everything went OK you can now start the service using
-
-sudo systemctl start direwolf.service
-Code language: Bash (bash)
-To stop it
-
-sudo systemctl stop direwolf.service
-Code language: Bash (bash)
-Request its status
-
-sudo systemctl status direwolf.service
-Code language: CSS (css)
-To attach to the tmux terminal in order to watch direwolf do its thing
-
-sudo tmux attach -t direwolf
-
-```
-
-
-
-
-
-
-
-
-
-
-
-Installation (incomplete)
-=========================
-
-Remove Pulse Audio
-```
-sudo apt-get remove --purge pulseaudio
-sudo apt-get autoremove
-rm -rf /home/pi/.pulse
-
-sudo apt-get install cmake
-sudo apt-get install libasound2-dev
-sudo apt-get install libudev-dev
-
-cd ~
-git clone https://www.github.com/wb2osz/direwolf
-cd direwolf
-git checkout dev
-
-mkdir build && cd build
-cmake -DUNITTEST=1 ..
-make -j4
-make test
-sudo make install
-
-make install-conf
-
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Accessing the DigiRig Serial Device as a Normal User
-====================================================
-
-The DigiRig presents two USB devices to your operating system: the first is a sound card and the second is a serial device. We need to make sure that your normal user account can access the DigiRig’s serial device without requiring root access using sudo.  We can do this by adding your normal user account to the dialout group.
-
-Replace YOURUSER with your user name.
-
-```
-$ sudo usermod -a -G dialout YOURUSER
-$ groups YOURUSER
-```
-
-Assign a Consistent Serial Device Name
-Find the current device path for the DigiRig. It should be something like /dev/ttyUSBX where X is some number.
-
-```
-$ ls -l /dev/serial/by-id | grep CP2102
-lrwxrwxrwx 1 root root 13 Apr 27 06:04 usb-Silicon_Labs_CP2102N_USB_to_UART_Bridge_Controller_a068f09199b1eb118c57b87718997a59-if00-port0 -> ../../ttyUSB4
-Lookup the device information using the device manager admin tool. In my case, /dev/ttyUSB4. Replace your device below.
-$ udevadm info -a -n /dev/ttyUSB4
-```
-
-Find the device that matches the attribute below.
-ATTRS{product}=="CP2102N USB to UART Bridge Controller"
-In my case, /devices/pci0000:00/0000:00:14.0/usb1/1-5/1-5.2.
-
-Dump the variables for this device.
-
-```
-$ udevadm test /devices/pci0000:00/0000:00:14.0/usb1/1-5/1-5.2
-Next, let's create a udev rule file. This file will allow our normal user account to access the device as will as give it a consistent device name that we call /dev/tty-digirig.
-$ sudo vi /etc/udev/rules.d/emcomm-tools-digirig.rules
-SUBSYSTEM=="tty", GROUP="dialout", MODE="0660", ATTRS{product}=="CP2102N USB to UART Bridge Controller", SYMLINK+="tty-digirig"
-Set the permissions.
-$ sudo chmod 0644 /etc/udev/rules.d/emcomm-tools-digirig.rules
-Reload the device rules.
-$ sudo udevadm control --reload-rules
-Reboot.
-
-```
-
-Verify the symlink exists on reboot.
-
-```
-$ ls -l /dev/tty-digirig
-lrwxrwxrwx 1 root root 7 Apr 23 05:43 /dev/tty-digirig -> ttyUSB0
-
-```
-
-At this point we can now use the /dev/tty-digirig as a consistent device path for the DigiRig's serial interface.
-
-Configure PTT
--------------
-
-Now that we have a serial device configured, let's update our Dire Wolf configuration so that we can trigger the PTT on the Baofeng.
-
-Edit the Dire Wolf configuration: nano ~/direwolf.conf.
-
-Search for the keyword PTT and add a PTT definition for the DigiRig's serial device.
-
-```
-PTT /dev/tty-digirig RTS
-```
-
-
-Start Dire Wolf.
-
-```
-$ direwolf
-```
-
-Note: If you are running gpsd with AUTOUSB="true" you may notice that the Baofeng will get stuck in transmit mode. This is a known issue with the DigiRig under Linux when using gpsd. A workaround is to edit /etc/default/gpsd and set AUTOUSB="false", then reboot.
-
+2. **Download and Install Win32 Disk Imager**
+   - Visit the [official Win32 Disk Imager website](https://sourceforge.net/projects/win32diskimager/) to download the software.
+   - Follow the installation instructions to install Win32 Disk Imager on your Windows computer.
+
+3. **Insert SD Card**
+   - Insert the blank SD card into your computer's SD card reader.
+
+4. **Open Win32 Disk Imager**
+   - Launch Win32 Disk Imager on your computer. You may need to run it as an administrator.
+
+5. **Select Raspberry Pi Image File**
+   - Click on the folder icon in the "Image File" field.
+   - Navigate to and select the file you unzipped `pitnc_master_revXXX.img`
+
+6. **Choose Target Device**
+   - In the "Device" field, select the drive letter corresponding to your SD card. 
+
+  
+> [!WARNING]  
+> Be careful to choose the correct drive to avoid data loss.
+
+7. **Write Image to SD Card**
+   - Click the "Write" button to begin the writing process.
+   - Confirm the action when prompted, as this will overwrite all data on the selected SD card.
+
+# Editing the pitnc.conf file on SD Card
+
+In the root directory of the PiTNC SD Card is a file `pitnc.conf`. This configuration file allows for initual setup of your WIFI connectivity. When the Raspberry Pi boots the WIFI information will be automatically configured and will connect to your local WIFI.
+
+1. Open `pitnc.conf` in a text editor like Notepad
+
+2. The contents of the file are as shown:
+   ```
+   # PiTNC BOOT Configuration file.
+   # This file is checked durring boot. If settings are changed and the pi is in read/write
+   # mode, the settings are applied.
+   
+   # WIFI
+   # NOTE: Must leave a space after colon. Example: ssid: MyWifiSsid
+   #       See https://yaml.org/
+   wifi:
+       ssid: 
+       password: 
+   
+   # FILE SYSTEM
+   # Set fsmode to 1 to make file system READ ONLY
+   # Set fsmode to 2 to make file system READ WRITE
+   # Set fsmode to 3 to leave the file system mode unchanged
+   fsmode: 3
+   ```
+3. Enter your WIFI SSID (name of your wifi network) after `ssid: `
+   ```
+   ssid: <your wifi ssid>
+   ```
+4. Enter your WIFI Password after `password: `.
+   ```
+   password: <your wifi password>
+   ```
+> [!NOTE]  
+> Make sure to leave a space after the `:`. This is a YAML file format requirement.
+5. Save the file.
+6. Safely eject the SD Card from your computer.
+
+# SSH Into you PiTNC
+
+After the Raspberry Pi boots up, if the configuration was done correctly it should connect to your local WIFI.
+
+1. From the command prompt on your computer (Windows PowerShell for example). Type the following at the prompt:
+   ```console
+   $ ssh tnc@pitnc.local
+   ```
+
+> [!NOTE]  
+> On Windows 10 - 11, `PS C:\> Resolve-DnsName -Name pitnc.local` can be used to return the ip address of the PiTNC.
+
+   
+2. You will be prompted for the password. The default password is **1200baud**. This can be changed after logging into the device.
+
+3. The following information will be displayed:
+   ```console
+   ======================================
+               _ __
+        ____  (_) /_____  _____
+       / __ \/ / __/ __ \/ ___/
+      / /_/ / / /_/ / / / /__
+     / .___/_/\__/_/ /_/\___/
+    /_/  Ham Tracks Offroad
+
+   ======================================
+   
+   BLUETOOTH NAME: pitnc <YOUR BLUETOOTH MAC>
+    BLUETOOTH MAC: <YOUR BLOOTOOTH MAC>
+       IP ADDRESS: <YOUR IP ADDRESS>
+             WIFI: <YOUR WIFI>
+    TNC KISS PORT: 8001
+      FILE SYSTEM: READ/WRITE
+   
+   usage: pitnc.py [-h] [-s] [-i] [-a] [--drestart] [--dmonitor] [-r | -w]
+   
+   pitnc configuration tool
+   
+   optional arguments:
+     -h, --help       show this help message and exit
+     -s, --splash     display the splash screen.
+     -i, --info       display the system info.
+     -a, --addwifi    add a wifi network.
+     --drestart       restart direwolf (after any modifications to direwolf.conf)
+     --dmonitor       enter direwolf activity monitor.
+     -r, --readonly   make the file system read only.
+     -w, --readwrite  make the file system read and write.
+   ```
+
+
+   
